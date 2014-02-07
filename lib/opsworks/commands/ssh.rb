@@ -48,7 +48,7 @@ module OpsWorks::Commands
         instances.map! do |instance|
           ip = instance[:private_ip] #|| instance[:public_ip]
           parameters = {
-            "Host"                  => "#{instance[:hostname]}-#{stack_name} #{ip}",
+            "Host"                  => "#{instance[:hostname]}-#{stack_name}",
             "HostName"              => ip,
             "User"                  => config.ssh_user_name,
           }
