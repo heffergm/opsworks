@@ -46,7 +46,11 @@ module OpsWorks::Commands
 
         #instances.reject! { |i| i[:elastic_ip].nil? && i[:public_ip].nil? }
         instances.map! do |instance|
-          ip = instance[:public_ip] # || instance[:private_ip]
+          if instance[:elastic_ip].nil?
+            ip = instance[:public_ip]
+          else
+            ip = instance[:elastic_ip]
+          end
           parameters = {
             "Host"                  => "#{instance[:hostname]}-#{stack_name}",
             "HostName"              => ip,
